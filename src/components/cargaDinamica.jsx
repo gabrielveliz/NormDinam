@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { Button } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
 
 const ExcelHandler = () => {
   const [excelData, setExcelData] = useState(null);
@@ -72,16 +74,38 @@ if (!isInvalidDate) {
 }
 
           const transformedRow = [
-            formattedRow[2], // Columna C
-            `${formattedRow[0]}-${formattedRow[1]}`, // Concatenar A y B
-            formattedRow[9], // Columna J
-            formattedRow[21], // Columna V
-            formattedRow[22], // Columna W
-            formattedRow[23], // Columna X
-            (formattedDateString === "")? "00-00-0000" : formattedDateString,
-            formattedRow[48],// correo
-            (formattedRow[24] !== undefined) ? `${formattedRow[24]}${formattedRow[25]}` : (formattedRow[25] !== undefined) ? `${formattedRow[25]}`:"", // Concatenar A y B si ambos no son undefined
-            (formattedRow[26] !== undefined) ? `${formattedRow[26]}${formattedRow[27]}` : (formattedRow[27] !== undefined) ? `${formattedRow[27]}`:"", // Concatenar A y B
+            formattedRow[2], // Columna C - Nro_Documento
+            `${formattedRow[0]}-${formattedRow[1]}`, // Concatenar A y B - RUT - DV
+            formattedRow[9], // Columna J - NOMBRE
+            "C1", // AD1
+            " ", // NombreProducto
+            formattedRow[21], // Columna V - AD2
+            formattedRow[22], // Columna W - AD3
+            formattedRow[23], // Columna X - AD4
+            formattedRow[11], // Columna L - AD5
+            formattedRow[12], // Columna M - AD6
+            formattedRow[14], // Columna O - AD7
+            " ", // DEUDA TOTAL
+            (formattedDateString === "")? "00-00-0000" : formattedDateString, // AD11
+            " ", // AD8
+            " ", // AD9
+            " ", // AD10
+            formattedRow[16], //DIRECCION
+            formattedRow[19], //COMUNA
+            " ", //CIUDAD
+            formattedRow[20], //REGION
+            " ", //DIRECCION_COMERCIAL
+            " ", //COMUNA_COMERCIAL
+            " ", //CIUDAD_COMERCIAL
+            " ", //REGION_COMERCIAL
+            " ", //EMAIL1
+            formattedRow[48],// correo - AD13
+            (formattedRow[24] !== undefined) ? `${formattedRow[24]}${formattedRow[25]}` : (formattedRow[25] !== undefined) ? `${formattedRow[25]}`:"", // Concatenar A y B si ambos no son undefined - FONO1
+            (formattedRow[26] !== undefined) ? `${formattedRow[26]}${formattedRow[27]}` : (formattedRow[27] !== undefined) ? `${formattedRow[27]}`:"", // Concatenar A y B si ambos no son undefined - FONO2
+            (formattedRow[28] !== undefined) ? `${formattedRow[28]}${formattedRow[29]}` : (formattedRow[29] !== undefined) ? `${formattedRow[29]}`:"", // Concatenar A y B si ambos no son undefined - FONO3
+            (formattedRow[30] !== undefined) ? `${formattedRow[30]}${formattedRow[31]}` : (formattedRow[31] !== undefined) ? `${formattedRow[31]}`:"", // Concatenar A y B si ambos no son undefined - FONO4
+            (formattedRow[32] !== undefined) ? `${formattedRow[32]}${formattedRow[33]}` : (formattedRow[33] !== undefined) ? `${formattedRow[33]}`:"", // Concatenar A y B si ambos no son undefined - FONO5
+            (formattedRow[34] !== undefined) ? `${formattedRow[34]}${formattedRow[35]}` : (formattedRow[35] !== undefined) ? `${formattedRow[35]}`:"", // Concatenar A y B si ambos no son undefined - FONO6
             
           ];
 
@@ -100,7 +124,17 @@ if (!isInvalidDate) {
     const newWorkbook = XLSX.utils.book_new();
 
     // Crear una nueva hoja
-    const newSheet = XLSX.utils.aoa_to_sheet([["Nro_Documento", "RUT - DV", "NOMBRE", "AD2", "AD3", "AD4","AD11","AD13","FONO1","FONO2"], ...excelData.slice(1)]);
+    const newSheet = XLSX.utils.aoa_to_sheet([["Nro_Documento", "RUT - DV", "NOMBRE","AD1","NombreProducto", "AD2", "AD3", "AD4", "AD5", "AD6","AD7","DEUDA TOTAL","AD11","AD8","AD9","AD10","DIRECCION","COMUNA","CIUDAD","REGION","DIRECCION_COMERCIAL","COMUNA_COMERCIAL","CIUDAD_COMERCIAL","REGION_COMERCIAL","EMAIL1","AD13","FONO1","FONO2"
+  ,"FONO3", "FONO4"	,"FONO5"	,"FONO6"	,"AD14"	,"AD15"	,"TIPO_DEUDOR"	,
+  "TIPO_PRODUCTO 1",	"AFINIDAD_1",	"NRO_PRODUCTO 1",	"FECHA_VEN_1","COD_SEG_1",	"ID_BANCO_1",	
+  "TIPO_PRODUCTO_2",	"AFINIDAD_2",	"NRO_PRODUCTO_2",	"FECHA_VEN_2",	"COD_SEG_2",	"ID_BANCO_2"	,
+  "TIPO_PRODUCTO_3",	"AFINIDAD_3",	"NRO_PRODUCTO_3",	"FECHA_VEN_3",	"COD_SEG_3",	"ID_BANCO_3"	,
+  "TIPO_PRODUCTO_4",	"AFINIDAD_4",	"NRO_PRODUCTO_4",	"FECHA_VEN_4",	"COD_SEG_4",	"ID_BANCO_4"	,
+  "TIPO_PRODUCTO_5",	"AFINIDAD_5",	"NRO_PRODUCTO_5",	"FECHA_VEN_5",	"COD_SEG_5",	"ID_BANCO_5"	,
+  "PRIMER_NOMBRE"	,"SEGUNDO_NOMBRE",	"APE_PATERNO",	"APE_MATERNO",	"EDAD",	"SEXO",	"FECHA_NAC"	,
+  "NUMERO",	"DEPARTAMENTO"	,"POBLACION"
+
+], ...excelData.slice(1)]);
 
     // Agregar la hoja al nuevo libro
     XLSX.utils.book_append_sheet(newWorkbook, newSheet, 'Sheet1');
@@ -112,14 +146,23 @@ if (!isInvalidDate) {
 
     const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
 
-    saveAs(blob, 'normalizada ' + formattedDateTime + '.xlsx');
+    saveAs(blob, 'NORMALIZADA SIN POBLAR ' + formattedDateTime + '.xlsx');
   };
 
   return (
     <div className='cont'>
-      <input type="file" accept=".xlsx" onChange={handleFileUpload} />
+      <div class="file-select" id="src-file1" >
+
+        <Form.Group controlId="formFile" className="mb-3">
+        <Form.Label>Cargar "ASIGNACION DINAMICA - PHOENIX (TELEFONIA)"</Form.Label>
+        <Form.Control type="file" accept=".xlsx" onChange={handleFileUpload}/>
+      </Form.Group>
+      </div>
       {excelData && (
-        <button onClick={handleDownload}>Descargar Normalizado</button>
+        <div>
+        <p>Nuevo Archivo: {'NORMALIZADA SIN POBLAR ' + formattedDateTime + '.xlsx'}</p>
+        <Button onClick={handleDownload}>Descargar Normalizado</Button>
+        </div>
       )}
     </div>
   );

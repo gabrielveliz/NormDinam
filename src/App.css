@@ -9,7 +9,20 @@ body{
 .App{
   margin: auto;
   padding: 2rem;
+  text-align: center;
 }
 .cont{
   margin: auto;
 }
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo img{
+  width: 10rem;
+}
+h1{
+  padding: 2rem 0rem;
+}
+
