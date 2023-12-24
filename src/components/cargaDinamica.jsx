@@ -141,7 +141,7 @@ if (!isInvalidDate && !isInvalid) {
 ], ...excelData.slice(1)]);
 
     // Agregar la hoja al nuevo libro
-    XLSX.utils.book_append_sheet(newWorkbook, newSheet, 'Sheet1');
+    XLSX.utils.book_append_sheet(newWorkbook, newSheet, 'ARCHIVO DE CARGA ASIGNACION SC ');
 
     const excelBuffer = XLSX.write(newWorkbook, {
       bookType: 'xlsx',
