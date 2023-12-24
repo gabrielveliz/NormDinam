@@ -39,23 +39,27 @@ const ExcelHandler = () => {
         const sheet = workbook.Sheets[sheetName];
         const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-        const extractedData = jsonData.map((row, index) => {
+        const nonEmptyRows = jsonData.filter(row => row.some(cell => cell !== undefined && cell !== ""));
+
+        const extractedData = nonEmptyRows.map((row, index) => {
           if (index === 0) {
             return row;
           }
 
           const formattedRow = row.map((cell) =>
-            typeof cell === 'number' ? cell.toLocaleString('fullwide', { useGrouping: false }) : cell
-          );
+          typeof cell === 'number' ? cell.toLocaleString('fullwide', { useGrouping: false }) : cell
+        );
 
           const originalDate = formattedRow[62];
 
 // Verificar si la fecha es "00000000"
 const isInvalidDate = originalDate === "00000000";
+const isInvalid = originalDate === undefined;
+
 
 let formattedDateString = "";
 
-if (!isInvalidDate) {
+if (!isInvalidDate && !isInvalid) {
   // Obtener año, mes y día de la cadena original
   const year = originalDate.slice(0, 4);
   const month = originalDate.slice(4, 6);
@@ -72,10 +76,10 @@ if (!isInvalidDate) {
     // Puedes ajustar el formato según tus preferencias
   });
 }
-
+        
           const transformedRow = [
             formattedRow[2], // Columna C - Nro_Documento
-            `${formattedRow[0]}-${formattedRow[1]}`, // Concatenar A y B - RUT - DV
+            (formattedRow[0] !== undefined && formattedRow[1] !== undefined) ? `${formattedRow[0]}-${formattedRow[1]}`:"", // Concatenar A y B - RUT - DV
             formattedRow[9], // Columna J - NOMBRE
             "C1", // AD1
             " ", // NombreProducto
@@ -151,7 +155,7 @@ if (!isInvalidDate) {
 
   return (
     <div className='cont'>
-      <div class="file-select" id="src-file1" >
+      <div className="file-select" id="src-file1" >
 
         <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>Cargar "ASIGNACION DINAMICA - PHOENIX (TELEFONIA)"</Form.Label>
