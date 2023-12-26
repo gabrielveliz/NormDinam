@@ -82,7 +82,7 @@ if (!isInvalidDate && !isInvalid) {
             (formattedRow[0] !== undefined && formattedRow[1] !== undefined) ? `${formattedRow[0]}-${formattedRow[1]}`:"", // Concatenar A y B - RUT - DV
             formattedRow[9], // Columna J - NOMBRE
             "C1", // AD1
-            " ", // NombreProducto
+            "NORMAL", // NombreProducto
             formattedRow[21], // Columna V - AD2
             formattedRow[22], // Columna W - AD3
             formattedRow[23], // Columna X - AD4
@@ -94,16 +94,16 @@ if (!isInvalidDate && !isInvalid) {
             " ", // AD8
             " ", // AD9
             " ", // AD10
-            formattedRow[16], //DIRECCION
-            formattedRow[19], //COMUNA
+            "PHOENIX (TELEFONIA)",  //formattedRow[16], DIRECCION
+            " ",//formattedRow[19], COMUNA
             " ", //CIUDAD
-            formattedRow[20], //REGION
+            " ", //formattedRow[20], REGION
             " ", //DIRECCION_COMERCIAL
             " ", //COMUNA_COMERCIAL
             " ", //CIUDAD_COMERCIAL
             " ", //REGION_COMERCIAL
-            " ", //EMAIL1
-            formattedRow[48],// correo - AD13
+            formattedRow[48], //EMAIL1
+            " ",// correo - AD13
             (formattedRow[24] !== undefined) ? `${formattedRow[24]}${formattedRow[25]}` : (formattedRow[25] !== undefined) ? `${formattedRow[25]}`:"", // Concatenar A y B si ambos no son undefined - FONO1
             (formattedRow[26] !== undefined) ? `${formattedRow[26]}${formattedRow[27]}` : (formattedRow[27] !== undefined) ? `${formattedRow[27]}`:"", // Concatenar A y B si ambos no son undefined - FONO2
             (formattedRow[28] !== undefined) ? `${formattedRow[28]}${formattedRow[29]}` : (formattedRow[29] !== undefined) ? `${formattedRow[29]}`:"", // Concatenar A y B si ambos no son undefined - FONO3
