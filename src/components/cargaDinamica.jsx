@@ -92,9 +92,9 @@ if (!isInvalidDate && !isInvalid) {
             " ", // DEUDA TOTAL
             (formattedDateString === "")? "00-00-0000" : formattedDateString, // AD11
             " ", // AD8
-            " ", // AD9
+            "PHOENIX (TELEFONIA)", // AD9
             " ", // AD10
-            "PHOENIX (TELEFONIA)",  //formattedRow[16], DIRECCION
+            " ",  //formattedRow[16], DIRECCION
             " ",//formattedRow[19], COMUNA
             " ", //CIUDAD
             " ", //formattedRow[20], REGION
