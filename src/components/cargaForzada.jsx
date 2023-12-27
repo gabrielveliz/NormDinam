@@ -49,6 +49,7 @@ const ExcelHandler = () => {
         const dvIndex = columnIndexMap['DDAS_DRT_PPAL'];
         const tramoIndex = columnIndexMap['TRAMO_MORA'];
         const nameIndex=columnIndexMap['DDAS_NOMBRE_DDOR'];
+        const productoIndex=columnIndexMap['PRODUCTO'];
         const marcaIndex=columnIndexMap['MARCA'];
         const modeloIndex=columnIndexMap['MODELO'];
         const patenteIndex=columnIndexMap['PATENTE'];
@@ -97,6 +98,8 @@ const ExcelHandler = () => {
         const dv = dvIndex !== undefined ? formattedRow[dvIndex] : '';
         const tramo =tramoIndex !== undefined ? formattedRow[        tramoIndex] : '';
         const name=nameIndex !== undefined ? formattedRow[nameIndex] : '';
+        const producto=productoIndex !== undefined ? formattedRow[productoIndex] : '';
+        
         const marca=marcaIndex !== undefined ? formattedRow[marcaIndex] : '';
         const modelo=modeloIndex !== undefined ? formattedRow[modeloIndex] : '';
         const patente=patenteIndex !== undefined ? formattedRow[patenteIndex] : '';
@@ -219,7 +222,7 @@ const ExcelHandler = () => {
             (rut !== undefined && dv !== undefined) ? `${rut}-${dv}`:"", // Concatenar A y B - RUT - DV
             name, // Columna J - NOMBRE
             tramo, // AD1
-            "NORMAL", // NombreProducto
+            producto, // NombreProducto  -- en forzada tiene dato
             marca, // Columna V - AD2 marca
             modelo, // Columna W - AD3 modelo
             patente, // Columna X - AD4 patente
