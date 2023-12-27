@@ -50,33 +50,94 @@ const ExcelHandler = () => {
           typeof cell === 'number' ? cell.toLocaleString('fullwide', { useGrouping: false }) : cell
         );
 
+    // ++++++  Seccion para formatear Fecha +++++++++++++++++
           const originalDate = formattedRow[62];
+          // Verificar si la fecha es "00000000"
+          const isInvalidDate = originalDate === "00000000";
+          const isInvalid = originalDate === undefined;
 
-// Verificar si la fecha es "00000000"
-const isInvalidDate = originalDate === "00000000";
-const isInvalid = originalDate === undefined;
 
+          let formattedDateString = "";
 
-let formattedDateString = "";
+          if (!isInvalidDate && !isInvalid) {
+            // Obtener año, mes y día de la cadena original
+            const year = originalDate.slice(0, 4);
+            const month = originalDate.slice(4, 6);
+            const day = originalDate.slice(6, 8);
 
-if (!isInvalidDate && !isInvalid) {
-  // Obtener año, mes y día de la cadena original
-  const year = originalDate.slice(0, 4);
-  const month = originalDate.slice(4, 6);
-  const day = originalDate.slice(6, 8);
+            // Crear un objeto Date con los componentes obtenidos
+            const formattedDate = new Date(`${year}-${month}-${day}`);
 
-  // Crear un objeto Date con los componentes obtenidos
-  const formattedDate = new Date(`${year}-${month}-${day}`);
+            // Obtener la fecha formateada como "DD-MM-YYYY"
+            formattedDateString = formattedDate.toLocaleDateString('es-CL', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              // Puedes ajustar el formato según tus preferencias
+            });
+          }
+      // ************************** Fin seccion formetear fecha *****************
 
-  // Obtener la fecha formateada como "DD-MM-YYYY"
-  formattedDateString = formattedDate.toLocaleDateString('es-CL', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    // Puedes ajustar el formato según tus preferencias
-  });
-}
+      // ++++++  Seccion validar numeros de telefono +++++++++++++++++
+      const fono1 = (formattedRow[24] !== undefined) ? `${formattedRow[24]}${formattedRow[25]}` : (formattedRow[25] !== undefined) ? `${formattedRow[25]}` : "";
+      const fono2 = (formattedRow[26] !== undefined) ? `${formattedRow[26]}${formattedRow[27]}` : (formattedRow[27] !== undefined) ? `${formattedRow[27]}` : "";
+      const fono3 = (formattedRow[28] !== undefined) ? `${formattedRow[28]}${formattedRow[29]}` : (formattedRow[29] !== undefined) ? `${formattedRow[29]}`:"";
+      const fono4 = (formattedRow[30] !== undefined) ? `${formattedRow[30]}${formattedRow[31]}` : (formattedRow[31] !== undefined) ? `${formattedRow[31]}`:"";
+      const fono5 = (formattedRow[32] !== undefined) ? `${formattedRow[32]}${formattedRow[33]}` : (formattedRow[33] !== undefined) ? `${formattedRow[33]}`:"";
+      const fono6 = (formattedRow[34] !== undefined) ? `${formattedRow[34]}${formattedRow[35]}` : (formattedRow[35] !== undefined) ? `${formattedRow[35]}`:"";
+      // Función para verificar y formatear números de teléfono
+      function formatPhoneNumber(phone) {
+        // Eliminar cualquier carácter que no sea un dígito
+        let cleanPhone = phone;
+      
+        const sonTodosIguales = (numero) => {
+          const numeroComoCadena = numero.toString();
+          const primerDigito = numeroComoCadena.charAt(0);
+      
+          for (let i = 1; i < numeroComoCadena.length; i++) {
+            if (numeroComoCadena.charAt(i) !== primerDigito) {
+              return false;
+            }
+          }
+      
+          return true;
+        };
+        //verificar si son numeros repetidos
+        if(sonTodosIguales(cleanPhone)){
+          cleanPhone="";
+        }
+      
+        // Verificar si el número tiene 11 dígitos y comienza con "56"
+        if (cleanPhone.length === 11 && cleanPhone.startsWith('56')) {
+          cleanPhone= `9${cleanPhone.slice(2)}`;
+        }
+      
+        // Verificar si el número tiene exactamente 8 dígitos
+        if (cleanPhone.length === 8) {
+          cleanPhone= `9${cleanPhone}`;
+        }
         
+        //despues de formatear los numeros, verifica si aun tienen mas o menos de 9 y los elimina si se cumple la condicion
+        if(cleanPhone.length<9){
+          cleanPhone="";
+        }
+        if(cleanPhone.length>9){
+          cleanPhone="";
+        }
+
+        //retornar numero despues de verificar las condiciones
+        return cleanPhone;
+      }
+      
+      // Aplicar la función de verificación a los números de teléfono
+      const formattedFono1 = formatPhoneNumber(fono1);
+      const formattedFono2 = formatPhoneNumber(fono2);
+      const formattedFono3 = formatPhoneNumber(fono3);
+      const formattedFono4 = formatPhoneNumber(fono4);
+      const formattedFono5 = formatPhoneNumber(fono5);
+      const formattedFono6 = formatPhoneNumber(fono6);
+        // ************************** Fin seccion para validar numeros de telefonos *****************
+
           const transformedRow = [
             formattedRow[2], // Columna C - Nro_Documento
             (formattedRow[0] !== undefined && formattedRow[1] !== undefined) ? `${formattedRow[0]}-${formattedRow[1]}`:"", // Concatenar A y B - RUT - DV
@@ -104,12 +165,12 @@ if (!isInvalidDate && !isInvalid) {
             " ", //REGION_COMERCIAL
             formattedRow[48], //EMAIL1
             " ",// correo - AD13
-            (formattedRow[24] !== undefined) ? `${formattedRow[24]}${formattedRow[25]}` : (formattedRow[25] !== undefined) ? `${formattedRow[25]}`:"", // Concatenar A y B si ambos no son undefined - FONO1
-            (formattedRow[26] !== undefined) ? `${formattedRow[26]}${formattedRow[27]}` : (formattedRow[27] !== undefined) ? `${formattedRow[27]}`:"", // Concatenar A y B si ambos no son undefined - FONO2
-            (formattedRow[28] !== undefined) ? `${formattedRow[28]}${formattedRow[29]}` : (formattedRow[29] !== undefined) ? `${formattedRow[29]}`:"", // Concatenar A y B si ambos no son undefined - FONO3
-            (formattedRow[30] !== undefined) ? `${formattedRow[30]}${formattedRow[31]}` : (formattedRow[31] !== undefined) ? `${formattedRow[31]}`:"", // Concatenar A y B si ambos no son undefined - FONO4
-            (formattedRow[32] !== undefined) ? `${formattedRow[32]}${formattedRow[33]}` : (formattedRow[33] !== undefined) ? `${formattedRow[33]}`:"", // Concatenar A y B si ambos no son undefined - FONO5
-            (formattedRow[34] !== undefined) ? `${formattedRow[34]}${formattedRow[35]}` : (formattedRow[35] !== undefined) ? `${formattedRow[35]}`:"", // Concatenar A y B si ambos no son undefined - FONO6
+            formattedFono1,//(formattedRow[24] !== undefined) ? `${formattedRow[24]}${formattedRow[25]}` : (formattedRow[25] !== undefined) ? `${formattedRow[25]}`:"", // Concatenar A y B si ambos no son undefined - FONO1
+            formattedFono2,//(formattedRow[26] !== undefined) ? `${formattedRow[26]}${formattedRow[27]}` : (formattedRow[27] !== undefined) ? `${formattedRow[27]}`:"", // Concatenar A y B si ambos no son undefined - FONO2
+            formattedFono3, // Concatenar A y B si ambos no son undefined - FONO3
+            formattedFono4, // Concatenar A y B si ambos no son undefined - FONO4
+            formattedFono5, // Concatenar A y B si ambos no son undefined - FONO5
+            formattedFono6, // Concatenar A y B si ambos no son undefined - FONO6
             
           ];
 
