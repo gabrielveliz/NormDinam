@@ -39,6 +39,44 @@ const ExcelHandler = () => {
         const sheet = workbook.Sheets[sheetName];
         const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
+        const headers = jsonData[0]; // Encabezados de las columnas
+        const columnIndexMap = createColumnIndexMap(headers);
+
+        const ddasIdNumeroOperacIndex = columnIndexMap['DDAS_ID_NUMERO_OPERAC'];
+        const rutIndex = columnIndexMap['DDAS_NRT_PPAL'];
+        const dvIndex = columnIndexMap['DDAS_DRT_PPAL'];
+        const nameIndex=columnIndexMap['DDAS_NOMBRE_DDOR'];
+        const marcaIndex=columnIndexMap['MARCA'];
+        const modeloIndex=columnIndexMap['MODELO'];
+        const patenteIndex=columnIndexMap['PATENTE'];
+        const totalIndex=columnIndexMap['DEUDA_TOTAL'];
+        const cuotaIndex=columnIndexMap['DDAS_MTO_CUOTA_MO'];  
+        const pacIndex=columnIndexMap['PAC'];  
+        const ultimopagoIndex=columnIndexMap['DDAS_FEC_ULT_PAGO'];  
+        const emailIndex=columnIndexMap['CORREO_1'];  
+
+        const area1Index=columnIndexMap['AREA1']; 
+        const fono1Index=columnIndexMap['FONO1'];   
+
+        const area2Index=columnIndexMap['AREA2']; 
+        const fono2Index=columnIndexMap['FONO2'];   
+
+        const area3Index=columnIndexMap['AREA3']; 
+        const fono3Index=columnIndexMap['FONO3'];   
+
+        const area4Index=columnIndexMap['AREA4']; 
+        const fono4Index=columnIndexMap['FONO4'];   
+
+        const area5Index=columnIndexMap['AREA5']; 
+        const fono5Index=columnIndexMap['FONO5'];  
+
+        const area6Index=columnIndexMap['AREA6']; 
+        const fono6Index=columnIndexMap['FONO6'];  
+
+
+
+
+        
         const nonEmptyRows = jsonData.filter(row => row.some(cell => cell !== undefined && cell !== ""));
 
         const extractedData = nonEmptyRows.map((row, index) => {
@@ -49,9 +87,41 @@ const ExcelHandler = () => {
           const formattedRow = row.map((cell) =>
           typeof cell === 'number' ? cell.toLocaleString('fullwide', { useGrouping: false }) : cell
         );
+        const ddasIdNumeroOperac = ddasIdNumeroOperacIndex !== undefined ? formattedRow[ddasIdNumeroOperacIndex] : '';
+        const rut = rutIndex !== undefined ? formattedRow[rutIndex] : '';
+        const dv = dvIndex !== undefined ? formattedRow[dvIndex] : '';
+        const name=nameIndex !== undefined ? formattedRow[nameIndex] : '';
+        const marca=marcaIndex !== undefined ? formattedRow[marcaIndex] : '';
+        const modelo=modeloIndex !== undefined ? formattedRow[modeloIndex] : '';
+        const patente=patenteIndex !== undefined ? formattedRow[patenteIndex] : '';
+        const total=totalIndex !== undefined ? formattedRow[totalIndex] : '';
+        const cuota=cuotaIndex !== undefined ? formattedRow[cuotaIndex] : '';
+        const pac=pacIndex !== undefined ? formattedRow[pacIndex] : '';
+        const ultimopago=ultimopagoIndex !== undefined ? formattedRow[ultimopagoIndex] : '';
+        const email=emailIndex !== undefined ? formattedRow[emailIndex] : '';
+
+        const area1data=area1Index !== undefined ? formattedRow[area1Index] : '';
+        const fono1data=fono1Index !== undefined ? formattedRow[fono1Index] : '';
+
+        const area2data=area2Index !== undefined ? formattedRow[area2Index] : '';
+        const fono2data=fono2Index !== undefined ? formattedRow[fono2Index] : '';
+
+        const area3data=area3Index !== undefined ? formattedRow[area3Index] : '';
+        const fono3data=fono3Index !== undefined ? formattedRow[fono3Index] : '';
+
+        const area4data=area4Index !== undefined ? formattedRow[area4Index] : '';
+        const fono4data=fono4Index !== undefined ? formattedRow[fono4Index] : '';
+
+        const area5data=area5Index !== undefined ? formattedRow[area5Index] : '';
+        const fono5data=fono5Index !== undefined ? formattedRow[fono5Index] : '';
+
+        const area6data=area6Index !== undefined ? formattedRow[area6Index] : '';
+        const fono6data=fono6Index !== undefined ? formattedRow[fono6Index] : '';
+        
+
 
     // ++++++  Seccion para formatear Fecha +++++++++++++++++
-          const originalDate = formattedRow[62];
+          const originalDate = ultimopago;
           // Verificar si la fecha es "00000000"
           const isInvalidDate = originalDate === "00000000";
           const isInvalid = originalDate === undefined;
@@ -79,12 +149,12 @@ const ExcelHandler = () => {
       // ************************** Fin seccion formetear fecha *****************
 
       // ++++++  Seccion validar numeros de telefono +++++++++++++++++
-      const fono1 = (formattedRow[24] !== undefined) ? `${formattedRow[24]}${formattedRow[25]}` : (formattedRow[25] !== undefined) ? `${formattedRow[25]}` : "";
-      const fono2 = (formattedRow[26] !== undefined) ? `${formattedRow[26]}${formattedRow[27]}` : (formattedRow[27] !== undefined) ? `${formattedRow[27]}` : "";
-      const fono3 = (formattedRow[28] !== undefined) ? `${formattedRow[28]}${formattedRow[29]}` : (formattedRow[29] !== undefined) ? `${formattedRow[29]}`:"";
-      const fono4 = (formattedRow[30] !== undefined) ? `${formattedRow[30]}${formattedRow[31]}` : (formattedRow[31] !== undefined) ? `${formattedRow[31]}`:"";
-      const fono5 = (formattedRow[32] !== undefined) ? `${formattedRow[32]}${formattedRow[33]}` : (formattedRow[33] !== undefined) ? `${formattedRow[33]}`:"";
-      const fono6 = (formattedRow[34] !== undefined) ? `${formattedRow[34]}${formattedRow[35]}` : (formattedRow[35] !== undefined) ? `${formattedRow[35]}`:"";
+      const fono1 = (area1data !== undefined) ? `${area1data}${fono1data}` : (fono1data !== undefined) ? `${fono1data}` : "";
+      const fono2 = (area2data !== undefined) ? `${area2data}${fono2data}` : (fono2data !== undefined) ? `${fono2data}` : "";
+      const fono3 = (area3data !== undefined) ? `${area3data}${fono3data}` : (fono3data !== undefined) ? `${fono3data}` : "";
+      const fono4 = (area4data !== undefined) ? `${area4data}${fono4data}` : (fono4data !== undefined) ? `${fono4data}` : "";
+      const fono5 = (area5data !== undefined) ? `${area5data}${fono5data}` : (fono5data !== undefined) ? `${fono5data}` : "";
+      const fono6 = (area6data !== undefined) ? `${area6data}${fono6data}` : (fono6data !== undefined) ? `${fono6data}` : "";
       // Función para verificar y formatear números de teléfono
       function formatPhoneNumber(phone) {
         // Eliminar cualquier carácter que no sea un dígito
@@ -139,19 +209,19 @@ const ExcelHandler = () => {
         // ************************** Fin seccion para validar numeros de telefonos *****************
 
           const transformedRow = [
-            formattedRow[2], // Columna C - Nro_Documento
-            (formattedRow[0] !== undefined && formattedRow[1] !== undefined) ? `${formattedRow[0]}-${formattedRow[1]}`:"", // Concatenar A y B - RUT - DV
-            formattedRow[9], // Columna J - NOMBRE
+            ddasIdNumeroOperac, // Columna C - Nro_Documento - autodetectado por nombre de columna
+            (rut !== undefined && dv !== undefined) ? `${rut}-${dv}`:"", // Concatenar A y B - RUT - DV
+            name, // Columna J - NOMBRE
             "C1", // AD1
             "NORMAL", // NombreProducto
-            formattedRow[21], // Columna V - AD2
-            formattedRow[22], // Columna W - AD3
-            formattedRow[23], // Columna X - AD4
-            formattedRow[11], // Columna L - AD5
-            formattedRow[12], // Columna M - AD6
-            formattedRow[14], // Columna O - AD7
+            marca, // Columna V - AD2 marca
+            modelo, // Columna W - AD3 modelo
+            patente, // Columna X - AD4 patente
+            total, // Columna L - AD5 deuda total
+            cuota, // Columna M - AD6 cuota
+            pac, // Columna O - AD7 pac
             " ", // DEUDA TOTAL
-            (formattedDateString === "")? "00-00-0000" : formattedDateString, // AD11
+            (formattedDateString === "")? "00-00-0000" : formattedDateString, // AD11 - fecha
             " ", // AD8
             "PHOENIX (TELEFONIA)", // AD9
             " ", // AD10
@@ -163,7 +233,7 @@ const ExcelHandler = () => {
             " ", //COMUNA_COMERCIAL
             " ", //CIUDAD_COMERCIAL
             " ", //REGION_COMERCIAL
-            formattedRow[48], //EMAIL1
+            email, //EMAIL1
             " ",// correo - AD13
             formattedFono1,//(formattedRow[24] !== undefined) ? `${formattedRow[24]}${formattedRow[25]}` : (formattedRow[25] !== undefined) ? `${formattedRow[25]}`:"", // Concatenar A y B si ambos no son undefined - FONO1
             formattedFono2,//(formattedRow[26] !== undefined) ? `${formattedRow[26]}${formattedRow[27]}` : (formattedRow[27] !== undefined) ? `${formattedRow[27]}`:"", // Concatenar A y B si ambos no son undefined - FONO2
@@ -183,6 +253,14 @@ const ExcelHandler = () => {
 
       reader.readAsArrayBuffer(file);
     }
+  };
+
+  const createColumnIndexMap = (headers) => {
+    const columnIndexMap = {};
+    headers.forEach((header, index) => {
+      columnIndexMap[header] = index;
+    });
+    return columnIndexMap;
   };
 
   const handleDownload = () => {
@@ -226,7 +304,7 @@ const ExcelHandler = () => {
       {excelData && (
         <div>
         <p>Nuevo Archivo: {'NORMALIZADA SIN POBLAR ' + formattedDateTime + '.xlsx'}</p>
-        <Button onClick={handleDownload}>Descargar Normalizado</Button>
+        <Button onClick={handleDownload}>Descargar Normalizado Dinamica</Button>
         </div>
       )}
     </div>
