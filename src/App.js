@@ -1,19 +1,20 @@
-import React from 'react';
-import ExcelHandler from './components/cargaDinamica';
-import Excelorzada from './components/cargaForzada';
-import Fot from './components/Fot';
-import logo from './assets/img/logo.PNG'
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./views/Home";
+import SantCons from "./views/SantCons"
+import CajD18 from "./views/CajD18"
+
 
 function App() {
   return (
-    <div className="App">
-      <div className='logo'><img src={logo} alt="logo" /></div>
-      <h1>Normalización</h1>
-      <ExcelHandler />
-      <Excelorzada/>
-      <Fot></Fot>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/SanCon" element={<SantCons />} />
+      <Route path="/C18" element={<CajD18 />} />
+      <Route render={() => <h1>Not found!</h1>} />
+    </Routes>
+  </BrowserRouter>
   );
 }
 
