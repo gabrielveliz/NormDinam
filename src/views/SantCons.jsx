@@ -14,7 +14,7 @@ function SantCons() {
         <ExcelHandler />
         <Excelorzada/>
         <Link to="/home" style={{ textDecoration: 'none' }}>
-                <div >
+                <div className="options" >
                     <span>Regresar</span>
                 </div>
             </Link>

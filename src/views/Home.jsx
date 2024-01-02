@@ -10,12 +10,12 @@ const Home = () =>{
             <div className='logo'><img src={logo} alt="logo" /></div>
             <h1>Welcome to BI Console</h1>
             <Link to="/SanCon" style={{ textDecoration: 'none' }}>
-                <div>
+                <div className="options">
                     <span>S.C.</span>
                 </div>
             </Link>
             <Link to="/C18" style={{ textDecoration: 'none' }}>
-                <div>
+                <div className="options">
                     <span>C18</span>
                 </div>
             </Link>

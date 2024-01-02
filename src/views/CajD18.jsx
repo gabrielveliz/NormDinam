@@ -13,7 +13,7 @@ const CajD18 = () =>{
             <h1>Normalización C18</h1>
             <NormAsig18/>
             <Link to="/home" style={{ textDecoration: 'none' }}>
-                    <div >
+                    <div className="options" >
                         <span>Regresar</span>
                     </div>
             </Link>

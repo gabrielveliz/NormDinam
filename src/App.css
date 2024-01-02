@@ -46,3 +46,22 @@ h1{
 .forz{
   margin-top: 4rem;
 }
+.options{
+  padding:0.5rem 2rem;
+  color: rgb(107, 107, 107);
+  border-radius: 10rem;
+}
+.options span{
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.options:hover{
+  background-color: rgb(255, 196, 0);
+  color:rgb(255, 255, 255);
+}
+.note{
+  margin-top: 1rem;
+  color: red;
+  font-weight: 700;
+}

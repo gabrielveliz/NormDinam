@@ -197,7 +197,7 @@ const NormAsig18 = () => {
             
           ];
 
-
+          console.log("trabajando")
           return transformedRow;
         });
 
@@ -248,9 +248,10 @@ const NormAsig18 = () => {
   return (
     <div className='cont'>
         <div className="file-select" id="src-file1" >
-
+        
         <Form.Group controlId="formFile" className="mb-3">
         <Form.Label>Cargar Archivo "RPT_"</Form.Label>
+        
         <Form.Control type="file" accept=".xlsx" onChange={handleFileUpload}/>
         </Form.Group>
         </div>
@@ -260,6 +261,7 @@ const NormAsig18 = () => {
         <Button onClick={handleDownload}>Descargar C18 Normalizado</Button>
         </div>
         )}
+        <span className='note'>Advertencia: archivos con mas de 50.000 filas, tienen un alto consumo de memoria y demora considerable.</span>
     </div>
     );
 };
