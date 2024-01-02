@@ -1,0 +1,67 @@
+body{
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.App{
+  margin: auto;
+  padding: 2rem;
+  text-align: center;
+}
+.cont{
+  margin: auto;
+}
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo img{
+  width: 10rem;
+}
+h1{
+  padding: 2rem 0rem;
+}
+.foot{
+
+  text-align: center;
+  margin-top: 5rem;
+  bottom: 0 ;
+  left: 0;
+  width: 100%;
+}
+.foot a{
+  text-decoration: none;
+  color: rgb(235, 172, 0);
+
+}
+.foot span{
+
+  font-size: 1.2rem;
+}
+
+.forz{
+  margin-top: 4rem;
+}
+.options{
+  padding:0.5rem 2rem;
+  color: rgb(107, 107, 107);
+  border-radius: 10rem;
+}
+.options span{
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.options:hover{
+  background-color: rgb(255, 196, 0);
+  color:rgb(255, 255, 255);
+}
+.note{
+  margin-top: 1rem;
+  color: red;
+  font-weight: 700;
+}
