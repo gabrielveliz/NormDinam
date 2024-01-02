@@ -197,7 +197,7 @@ const NormAsig18 = () => {
             
           ];
 
-          console.log("trabajando")
+
           return transformedRow;
         });
 
