@@ -165,9 +165,9 @@ const NormAsig18 = () => {
             ddasIdNumeroOperac, // Columna C - Nro_Documento - autodetectado por nombre de columna
             (rut !== undefined && dv !== undefined) ? `${rut}-${dv}`:"", // Concatenar A y B - RUT - DV
             name, // NOMBRE
-            cuotasmorosas, // AD1
+            cuotasmorosas * 1, // AD1
             "Credito", // NombreProducto
-            valorcuota, // AD2 
+            valorcuota * 1, // AD2 
             'Monto Moroso "Nuevo"', // AD3 
             " ", // AD4
             " ", // AD5 
