@@ -191,13 +191,33 @@ const ExcelHandler = () => {
         return cleanPhone;
       }
       
-      // Aplicar la función de verificación a los números de teléfono
-      const formattedFono1 = formatPhoneNumber(fono1);
-      const formattedFono2 = formatPhoneNumber(fono2);
-      const formattedFono3 = formatPhoneNumber(fono3);
-      const formattedFono4 = formatPhoneNumber(fono4);
-      const formattedFono5 = formatPhoneNumber(fono5);
-      const formattedFono6 = formatPhoneNumber(fono6);
+ 
+
+      // Eliminar elementos vacíos del arreglo y Aplicar la función de verificación a los números de teléfono
+
+      const arregloConDuplicados = [formatPhoneNumber(fono1), formatPhoneNumber(fono2), formatPhoneNumber(fono3), formatPhoneNumber(fono4), formatPhoneNumber(fono5), formatPhoneNumber(fono6)];
+
+      // Filtrar valores únicos manteniendo los valores vacíos
+      const arregloSinDuplicados = [];
+      const valoresVacios = [];
+      
+      arregloConDuplicados.forEach((valor) => {
+        if (valor !== "" && !arregloSinDuplicados.includes(valor)) {
+          arregloSinDuplicados.push(valor);
+        } else if (valor === "") {
+          valoresVacios.push("");
+        }
+      });
+      
+      // Combinar los valores únicos con los valores vacíos al final
+      const arregloFinal = arregloSinDuplicados.concat(valoresVacios);
+
+      const formattedFono1 = arregloFinal[0];
+      const formattedFono2 = arregloFinal[1];
+      const formattedFono3 =arregloFinal[2] ;
+      const formattedFono4 = arregloFinal[3];
+      const formattedFono5 = arregloFinal[4];
+      const formattedFono6 = arregloFinal[5];
       
         // ************************** Fin seccion para validar numeros de telefonos *****************
 
@@ -213,21 +233,21 @@ const ExcelHandler = () => {
             total, // Columna L - AD5 deuda total
             cuota, // Columna M - AD6 cuota
             pac, // Columna O - AD7 pac
-            " ", // DEUDA TOTAL
+            "", // DEUDA TOTAL
             (formattedDateString === "")? "00-00-0000" : formattedDateString, // AD11 - fecha
-            " ", // AD8
+            "", // AD8
             "PHOENIX (TELEFONIA)", // AD9
-            " ", // AD10
-            " ",  //formattedRow[16], DIRECCION
-            " ",//formattedRow[19], COMUNA
-            " ", //CIUDAD
-            " ", //formattedRow[20], REGION
-            " ", //DIRECCION_COMERCIAL
-            " ", //COMUNA_COMERCIAL
-            " ", //CIUDAD_COMERCIAL
-            " ", //REGION_COMERCIAL
+            "", // AD10
+            "",  //formattedRow[16], DIRECCION
+            "",//formattedRow[19], COMUNA
+            "", //CIUDAD
+            "", //formattedRow[20], REGION
+            "", //DIRECCION_COMERCIAL
+            "", //COMUNA_COMERCIAL
+            "", //CIUDAD_COMERCIAL
+            "", //REGION_COMERCIAL
             email, //EMAIL1
-            " ",// correo - AD13
+            "",// correo - AD13
             formattedFono1,//(formattedRow[24] !== undefined) ? `${formattedRow[24]}${formattedRow[25]}` : (formattedRow[25] !== undefined) ? `${formattedRow[25]}`:"", // Concatenar A y B si ambos no son undefined - FONO1
             formattedFono2,//(formattedRow[26] !== undefined) ? `${formattedRow[26]}${formattedRow[27]}` : (formattedRow[27] !== undefined) ? `${formattedRow[27]}`:"", // Concatenar A y B si ambos no son undefined - FONO2
             formattedFono3, // Concatenar A y B si ambos no son undefined - FONO3
