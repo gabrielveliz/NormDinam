@@ -4,6 +4,7 @@ import { saveAs } from 'file-saver';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 
+
 const ExcelHandler = () => {
   const [excelData, setExcelData] = useState(null);
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
@@ -122,6 +123,7 @@ const ExcelHandler = () => {
 
     // ++++++  Seccion para formatear Fecha +++++++++++++++++
           const originalDate = ultimopago;
+          console.log(ultimopago)
           // Verificar si la fecha es "00000000"
           const isInvalidDate = originalDate === "00000000";
           const isInvalid = originalDate === undefined;
@@ -130,21 +132,11 @@ const ExcelHandler = () => {
           let formattedDateString = "";
 
           if (!isInvalidDate && !isInvalid) {
-            // Obtener año, mes y día de la cadena original
             const year = originalDate.slice(0, 4);
             const month = originalDate.slice(4, 6);
             const day = originalDate.slice(6, 8);
-
-            // Crear un objeto Date con los componentes obtenidos
-            const formattedDate = new Date(`${year}-${month}-${day}`);
-
-            // Obtener la fecha formateada como "DD-MM-YYYY"
-            formattedDateString = formattedDate.toLocaleDateString('es-CL', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-              // Puedes ajustar el formato según tus preferencias
-            });
+          
+            formattedDateString = day +"-"+month+"-"+year;
           }
       // ************************** Fin seccion formetear fecha *****************
 
@@ -206,6 +198,7 @@ const ExcelHandler = () => {
       const formattedFono4 = formatPhoneNumber(fono4);
       const formattedFono5 = formatPhoneNumber(fono5);
       const formattedFono6 = formatPhoneNumber(fono6);
+      
         // ************************** Fin seccion para validar numeros de telefonos *****************
 
           const transformedRow = [
