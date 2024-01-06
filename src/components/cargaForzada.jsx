@@ -139,22 +139,13 @@ const ExcelHandler = () => {
           let formattedDateString = "";
 
           if (!isInvalidDate && !isInvalid) {
-            // Obtener año, mes y día de la cadena original
             const year = originalDate.slice(0, 4);
             const month = originalDate.slice(4, 6);
             const day = originalDate.slice(6, 8);
-
-            // Crear un objeto Date con los componentes obtenidos
-            const formattedDate = new Date(`${year}-${month}-${day}`);
-
-            // Obtener la fecha formateada como "DD-MM-YYYY"
-            formattedDateString = formattedDate.toLocaleDateString('es-CL', {
-              day: '2-digit',
-              month: '2-digit',
-              year: 'numeric',
-              // Puedes ajustar el formato según tus preferencias
-            });
+          
+            formattedDateString = day +"-"+month+"-"+year;
           }
+          
       // ************************** Fin seccion formetear fecha *****************
 
       // ++++++  Seccion validar numeros de telefono +++++++++++++++++
