@@ -1,10 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-
 
 const ResultanteSC = () => {
   const [excelData, setExcelData] = useState(null);
@@ -36,10 +34,13 @@ const ResultanteSC = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: 'array' });
+        const workbook = XLSX.read(data, { 
+          type: 'array',
+          cellDates: true
+         });
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
-        const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+        const jsonData = XLSX.utils.sheet_to_json(sheet, {  header: 1, raw: false });
 
         const nonEmptyRows = jsonData.filter(row => row.some(cell => cell !== undefined && cell !== ""));
 
@@ -47,23 +48,24 @@ const ResultanteSC = () => {
           if (index === 0) {
             return row;
           }
-          const formattedRow = row.map((cell) =>
-          typeof cell === 'number' ? cell.toLocaleString('fullwide', { useGrouping: false }) : cell
-        );
-        
-
-
-
+          const formattedRow = row.map((cell, colIndex) => {
+            if (sheet['!cols'] && sheet['!cols'][colIndex] && sheet['!cols'][colIndex].z) {
+              // Usa el formato de la columna si está definido
+              return XLSX.utils.format_cell(cell, true, sheet['!cols'][colIndex].z);
+            } else {
+              return cell;
+            }
+          });
 
           const transformedRow = [
-            "",
-            formattedRow[0],
-            formattedRow[1],
-            formattedRow[2],
-            formattedRow[3],
-            formattedRow[4],
-            formattedRow[5],
-            formattedRow[6],
+            "", //A
+            formattedRow[0], //B
+            formattedRow[1], //C
+            formattedRow[2], //D
+            (formattedRow[7]==="Llamada por Discador") ? "IDONOSO":formattedRow[3],
+            (formattedRow[7]==="Llamada por Discador") ? "TELEFONIA":formattedRow[4],
+            (formattedRow[7]==="Llamada por Discador") ? "SIN CONTACTO TITULAR":formattedRow[5],
+            (formattedRow[7]==="Llamada por Discador") ? "NO CONTESTA/BUZON DE VOZ":formattedRow[6],
             formattedRow[7],
             formattedRow[8],
             formattedRow[9],
@@ -73,7 +75,6 @@ const ResultanteSC = () => {
             "PHOENIX ",
             
           ];
-
 
           return transformedRow;
         });
@@ -85,7 +86,6 @@ const ResultanteSC = () => {
     }
   };
 
-
   const handleDownload = () => {
     const newWorkbook = XLSX.utils.book_new();
 
@@ -96,11 +96,11 @@ const ResultanteSC = () => {
         "MIDE NUMERO TELEFONO","AREA","TELEFONO USADO","DIRECCION USADA","CORREO USADO","MIIDE FECHA COMPROMISO","FECHA COMPROMISO","RUT USUARIO","CONTACTO",
         "MIDE ID","NOMBRE USUARIO","NUMERO DE OPERACIÓN ",""
 
-
-], ...excelData.slice(1)]);
+], ...excelData.slice(1)
+]);
 
     // Agregar la hoja al nuevo libro
-    XLSX.utils.book_append_sheet(newWorkbook, newSheet, 'ARCHIVO DE CARGA ASIGNACION SC ');
+    XLSX.utils.book_append_sheet(newWorkbook, newSheet, 'Resultante SC');
 
     const excelBuffer = XLSX.write(newWorkbook, {
       bookType: 'xlsx',
@@ -109,7 +109,7 @@ const ResultanteSC = () => {
 
     const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
 
-    saveAs(blob, 'NORMALIZADA SIN POBLAR ' + formattedDateTime + '.xlsx');
+    saveAs(blob, 'Resultante SC normalizada ' + formattedDateTime + '.xlsx');
   };
 
   return (
@@ -117,14 +117,14 @@ const ResultanteSC = () => {
       <div className="file-select" id="src-file1" >
 
         <Form.Group controlId="formFile" className="mb-3">
-        <Form.Label>Cargar "ASIGNACION DINAMICA - PHOENIX (TELEFONIA)"</Form.Label>
+        <Form.Label>Cargar "Reporte Gestion"</Form.Label>
         <Form.Control type="file" accept=".xlsx" onChange={handleFileUpload}/>
       </Form.Group>
       </div>
       {excelData && (
         <div>
-        <p>Nuevo Archivo: {'NORMALIZADA SIN POBLAR ' + formattedDateTime + '.xlsx'}</p>
-        <Button onClick={handleDownload}>Descargar Normalizado Dinamica</Button>
+        <p>Nuevo Archivo: {'Resultante SC normalizada ' + formattedDateTime + '.xlsx'}</p>
+        <Button onClick={handleDownload}>Descargar Resulante</Button>
         </div>
       )}
     </div>

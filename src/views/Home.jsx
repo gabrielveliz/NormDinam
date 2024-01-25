@@ -11,7 +11,7 @@ const Home = () =>{
             <h1>Welcome to BI Console</h1>
             <Link to="/SanCon" style={{ textDecoration: 'none' }}>
                 <div className="options">
-                    <span>S.C.</span>
+                    <span>S.C. C1</span>
                 </div>
             </Link>
             <Link to="/C18" style={{ textDecoration: 'none' }}>

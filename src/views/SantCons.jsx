@@ -10,7 +10,7 @@ function SantCons() {
     return (
     <div className="App">
         <div className='logo'><img src={logo} alt="logo" /></div>
-        <h1>Normalización S.C.</h1>
+        <h1>Normalización S.C. C1</h1>
         <ExcelHandler />
         <Excelorzada/>
         <Link to="/home" style={{ textDecoration: 'none' }}>
