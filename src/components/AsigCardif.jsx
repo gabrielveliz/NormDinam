@@ -74,12 +74,21 @@ function AsigCardif() {
 
     const columnIndexX = headers.indexOf('FonoMovil');
 
+    const columnIndexY1 = headers.indexOf('AreaPart');
+
+    const columnIndexY2 = headers.indexOf('FonoPart');
+
+    const columnIndexZ1 = headers.indexOf('AreaLab');
+
+    const columnIndexZ2 = headers.indexOf('FonoLab');
+
+
     // AA = FREE
     
 
     
     function formateatelefono(fono){
-     
+    
       let telefono = fono.toString();
       if(fono.length===8){
         telefono = "919"+ fono.toString();
@@ -87,13 +96,34 @@ function AsigCardif() {
       if(fono.length===9){
         telefono = "91"+fono.toString();
       }
+      if(telefono.length!==11){
+        telefono = "";
+      }
       return telefono;
 
+    }
+
+    function joinphone(area,telefono){
+      
+      let phone = area +""+ telefono;
+
+      if(phone.length>9){
+        phone = phone.substring(phone.length - 9);
+      }
+      
+
+      phone= formateatelefono(phone)
+
+      return phone;
     }
 
     function card(tar){
       let tarjeta = tar.toString()
 
+      if(tarjeta.length===4)
+      {
+        tarjeta = tar.toString()
+      }
       if(tarjeta.length===3)
       {
         tarjeta = "0" + tar.toString()
@@ -116,21 +146,21 @@ function AsigCardif() {
     
     const filteredData = parsedData.data.map(row => ({
         
-        NOMBRE: row[headers[columnIndexA]],
-        APELLIDO: row[headers[columnIndexC1]] ? row[headers[columnIndexB1]]+" "+ row[headers[columnIndexB2]] :"",
+        NOMBRE: row[headers[columnIndexA]] ? row[headers[columnIndexA]].replace(/[^\w\s]/gi, '') : '',
+        APELLIDO: row[headers[columnIndexC1]] ? (row[headers[columnIndexB1]] ? row[headers[columnIndexB1]].replace(/[^\w\s]/gi, '') : '')+" "+ (row[headers[columnIndexB2]] ? row[headers[columnIndexB2]].replace(/[^\w\s]/gi, '') : ''):"",
         TIPOID: row[headers[columnIndexC1]] ? row[headers[columnIndexC1]]+"-"+ row[headers[columnIndexC2]]:"",
         ID: row[headers[columnIndexC1]] ? row[headers[columnIndexC1]]+"-"+ row[headers[columnIndexC2]]:"",
         EDAD: row[headers[columnIndexE]],
         SEXO: row[headers[columnIndexF]],
         PAIS: row[headers[columnIndexC1]] ? "CHILE" :"",
         DEPARTAMENTO: "",
-        CIUDAD: row[headers[columnIndexI]],
-        ZONA: row[headers[columnIndexJ]],
-        DIRECCION: row[headers[columnIndexK]],
+        CIUDAD: row[headers[columnIndexI]] ? row[headers[columnIndexI]].replace(/[^\w\s]/gi, '') : '',
+        ZONA: row[headers[columnIndexJ]] ? row[headers[columnIndexJ]].replace(/[^\w\s]/gi, '') : '',
+        DIRECCION: row[headers[columnIndexK]] ? row[headers[columnIndexK]].replace(/[^\w\s]/gi, '') : '',
         PRODUCTO: row[headers[columnIndexL]],
         SUBPRODUCTO: row[headers[columnIndexM]] ? row[headers[columnIndexM]].substring(row[headers[columnIndexM]].length - 2) : '',
-        NOMBREEJECUTIVO: row[headers[columnIndexN]],
-        NOMBRESUCURSAL: row[headers[columnIndexO]],
+        NOMBREEJECUTIVO: row[headers[columnIndexN]] ? row[headers[columnIndexN]].replace(/[^\w\s]/gi, '') : '',
+        NOMBRESUCURSAL: row[headers[columnIndexO]] ? row[headers[columnIndexO]].replace(/[^\w\s]/gi, '') : '',
         FECHANAC: row[headers[columnIndexP]] ? row[headers[columnIndexP]].substring(8  ,10) + "-" + row[headers[columnIndexP]].substring(5  ,7) + "-" + row[headers[columnIndexP]].substring(0  ,4) : '' ,  // row[headers[columnIndexP]] ? row[headers[columnIndexP]].substring(0  ,10) : ''
         XX: "",
         FECHA_APERT_CTACTE: row[headers[columnIndexR]] ? row[headers[columnIndexR]].substring(8  ,10) + "-" + row[headers[columnIndexR]].substring(5  ,7) + "-" + row[headers[columnIndexR]].substring(0  ,4) : '' ,
@@ -140,8 +170,8 @@ function AsigCardif() {
         CORREO: row[headers[columnIndexV]],
         CtaCte: row[headers[columnIndexC1]] ? card(row[headers[columnIndexW]]):"",
         FONOMOVIL: row[headers[columnIndexX]] ? formateatelefono(row[headers[columnIndexX]]):"",
-        FonoPartCompleto: "",
-        FonoLabCompleto: "",
+        FonoPartCompleto: row[headers[columnIndexC1]] ? joinphone(row[headers[columnIndexY1]],row[headers[columnIndexY2]]) :"",
+        FonoLabCompleto: row[headers[columnIndexC1]] ? joinphone(row[headers[columnIndexZ1]],row[headers[columnIndexZ2]]):"",
         COD:row[headers[columnIndexC1]] ? "FREE" :""
 
     }));
@@ -158,7 +188,7 @@ function AsigCardif() {
       <Form.Group controlId="formFile" className="mb-3">
       <p>Cargar CSV Asignacion Cardif</p>
       <Form.Control type="file" accept=".csv" onChange={handleFileUpload}/>
- 
+
       </Form.Group>
       </div>
       <div className='botoncardif'>
