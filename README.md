@@ -5,4 +5,4 @@
 ## (Por confidencialidad es toda la informacion que se puede entregar)
 
 ## este software utiliza las siguiente dependencias:
-npm i xlsx file-saver react-bootstrap bootstrap react-router-dom
+npm i xlsx file-saver react-bootstrap bootstrap react-router-dom papaparse
