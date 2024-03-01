@@ -14,9 +14,14 @@ const Home = () =>{
                     <span>S.C. C1</span>
                 </div>
             </Link>
+            <Link to="/cardif" style={{ textDecoration: 'none' }}>
+                <div className="options">
+                    <span>CARDIF</span>
+                </div>
+            </Link>
             <Link to="/C18" style={{ textDecoration: 'none' }}>
                 <div className="options">
-                    <span>C18</span>
+                    <span>C18 COB</span>
                 </div>
             </Link>
             <Fot></Fot>

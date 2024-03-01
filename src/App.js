@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./views/Home";
 import SantCons from "./views/SantCons"
 import CajD18 from "./views/CajD18"
+import Cardif from "./views/Cardif"
 import ResultSC from "./views/ResultSC"
 
 
@@ -12,6 +13,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
       <Route path="/SanCon" element={<SantCons />} />
+      <Route path="/cardif" element={<Cardif />} />
       <Route path="/ResulanteSC" element={<ResultSC />} />
       <Route path="/C18" element={<CajD18 />} />
       <Route render={() => <h1>Not found!</h1>} />
