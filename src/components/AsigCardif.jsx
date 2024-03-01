@@ -6,9 +6,11 @@ import Form from 'react-bootstrap/Form';
 
 function AsigCardif() {
   const [csvData, setCsvData] = useState(null);
+  const [csvFileName, setCsvFileName] = useState('');
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
+    setCsvFileName(file.name); // Guardar el nombre del archivo CSV
     const reader = new FileReader();
 
     reader.onload = (e) => {
@@ -147,7 +149,7 @@ function AsigCardif() {
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.json_to_sheet(filteredData);
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet 1');
-    XLSX.writeFile(workbook, 'output.xlsx');
+    XLSX.writeFile(workbook, csvFileName.replace('.csv', '') + ' PROCESADO.xlsx'); 
   };
 
   return (
