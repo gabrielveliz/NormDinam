@@ -113,48 +113,7 @@ const NormAsig18 = () => {
       //const fono1 = (area1data !== undefined) ? `${area1data}${fono1data}` : (fono1data !== undefined) ? `${fono1data}` : "";
 
       // Función para verificar y formatear números de teléfono
-      function formatPhoneNumber(phone) {
-        // Eliminar cualquier carácter que no sea un dígito
-        let cleanPhone = phone;
-      
-        const sonTodosIguales = (numero) => {
-          const numeroComoCadena = numero.toString();
-          const primerDigito = numeroComoCadena.charAt(0);
-      
-          for (let i = 1; i < numeroComoCadena.length; i++) {
-            if (numeroComoCadena.charAt(i) !== primerDigito) {
-              return false;
-            }
-          }
-      
-          return true;
-        };
-        //verificar si son numeros repetidos
-        if(sonTodosIguales(cleanPhone)){
-          cleanPhone="";
-        }
-      
-        // Verificar si el número tiene 11 dígitos y comienza con "56"
-        if (cleanPhone.length === 11 && cleanPhone.startsWith('56')) {
-          cleanPhone= `9${cleanPhone.slice(2)}`;
-        }
-      
-        // Verificar si el número tiene exactamente 8 dígitos
-        if (cleanPhone.length === 8) {
-          cleanPhone= `9${cleanPhone}`;
-        }
-        
-        //despues de formatear los numeros, verifica si aun tienen mas o menos de 9 y los elimina si se cumple la condicion
-        if(cleanPhone.length<9){
-          cleanPhone="";
-        }
-        if(cleanPhone.length>9){
-          cleanPhone="";
-        }
 
-        //retornar numero despues de verificar las condiciones
-        return cleanPhone;
-      }
       
       // Aplicar la función de verificación a los números de teléfono
       //const formattedFono1 = formatPhoneNumber(fono1);

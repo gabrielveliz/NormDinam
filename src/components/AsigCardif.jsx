@@ -104,8 +104,15 @@ function AsigCardif() {
     }
 
     function joinphone(area,telefono){
+      let phone ="";
+      if(area===-1){
+        phone = area +""+ telefono;
+      }
+      else{
+        let largo = area.indexOf(".");
+        phone = area.substring(0  ,largo) +""+ telefono;
+      }
       
-      let phone = area +""+ telefono;
 
       if(phone.length>9){
         phone = phone.substring(phone.length - 9);
@@ -144,6 +151,17 @@ function AsigCardif() {
       return tarjeta;
     }
     
+    function formattdate (date){
+      let fecha = "";
+      if(date.indexOf("-")===4){
+        fecha=date.substring(8  ,10) + "-" + date.substring(5  ,7) + "-" + date.substring(0  ,4)
+        return fecha
+      }
+      if(date.indexOf("-")===2){
+        fecha=date.substring(0  ,10)
+        return fecha
+      }
+    }
     const filteredData = parsedData.data.map(row => ({
         
         NOMBRE: row[headers[columnIndexA]] ? row[headers[columnIndexA]].replace(/[^\w\s]/gi, '') : '',
@@ -161,10 +179,10 @@ function AsigCardif() {
         SUBPRODUCTO: row[headers[columnIndexM]] ? row[headers[columnIndexM]].substring(row[headers[columnIndexM]].length - 2) : '',
         NOMBREEJECUTIVO: row[headers[columnIndexN]] ? row[headers[columnIndexN]].replace(/[^\w\s]/gi, '') : '',
         NOMBRESUCURSAL: row[headers[columnIndexO]] ? row[headers[columnIndexO]].replace(/[^\w\s]/gi, '') : '',
-        FECHANAC: row[headers[columnIndexP]] ? row[headers[columnIndexP]].substring(8  ,10) + "-" + row[headers[columnIndexP]].substring(5  ,7) + "-" + row[headers[columnIndexP]].substring(0  ,4) : '' ,  // row[headers[columnIndexP]] ? row[headers[columnIndexP]].substring(0  ,10) : ''
+        FECHANAC:  row[headers[columnIndexP]] ?  formattdate(row[headers[columnIndexP]]) : ''  ,
         XX: "",
-        FECHA_APERT_CTACTE: row[headers[columnIndexR]] ? row[headers[columnIndexR]].substring(8  ,10) + "-" + row[headers[columnIndexR]].substring(5  ,7) + "-" + row[headers[columnIndexR]].substring(0  ,4) : '' ,
-        FEC_APER_TAR: row[headers[columnIndexS]] ? row[headers[columnIndexS]].substring(8  ,10) + "-" + row[headers[columnIndexS]].substring(5  ,7) + "-" + row[headers[columnIndexS]].substring(0  ,4) : '' ,
+        FECHA_APERT_CTACTE: row[headers[columnIndexR]] ?  formattdate(row[headers[columnIndexR]]) : ''  ,
+        FEC_APER_TAR: row[headers[columnIndexS]] ?  formattdate(row[headers[columnIndexS]]) : ''  ,
         XX2: "",
         NROTC: row[headers[columnIndexC1]] ? card(row[headers[columnIndexU]]):"",
         CORREO: row[headers[columnIndexV]],
@@ -172,6 +190,7 @@ function AsigCardif() {
         FONOMOVIL: row[headers[columnIndexX]] ? formateatelefono(row[headers[columnIndexX]]):"",
         FonoPartCompleto: row[headers[columnIndexC1]] ? joinphone(row[headers[columnIndexY1]],row[headers[columnIndexY2]]) :"",
         FonoLabCompleto: row[headers[columnIndexC1]] ? joinphone(row[headers[columnIndexZ1]],row[headers[columnIndexZ2]]):"",
+        XX3:"",
         COD:row[headers[columnIndexC1]] ? "FREE" :""
 
     }));
