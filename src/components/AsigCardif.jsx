@@ -152,15 +152,20 @@ function AsigCardif() {
     }
     
     function formattdate (date){
-      let fecha = "";
+      let fecha = toString(date);
+
       if(date.indexOf("-")===4){
         fecha=date.substring(8  ,10) + "-" + date.substring(5  ,7) + "-" + date.substring(0  ,4)
         return fecha
       }
       if(date.indexOf("-")===2){
-        fecha=date.substring(0  ,10)
+        fecha=date.substring(0  ,2) + "-" + date.substring(3  ,5) + "-" + date.substring(6  ,10)
         return fecha
       }
+
+      fecha=date.substring(0  ,2) + "-" + date.substring(3 ,5) + "-" + date.substring(6  ,10)
+
+      return fecha;
     }
     const filteredData = parsedData.data.map(row => ({
         
