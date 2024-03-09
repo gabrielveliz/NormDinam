@@ -3,6 +3,7 @@ import Home from "./views/Home";
 import SantCons from "./views/SantCons"
 import CajD18 from "./views/CajD18"
 import C18Asig from "./views/C18Asig"
+import C18Baja from "./views/C18Baja"
 import C18Mas from "./views/C18Mas"
 import Cardif from "./views/Cardif"
 import ResultSC from "./views/ResultSC"
@@ -20,6 +21,7 @@ function App() {
       <Route path="/C18" element={<CajD18 />} />
       <Route path="/C18asig" element={<C18Asig />} />
       <Route path="/C18mas" element={<C18Mas />} />
+      <Route path="/C18Baja" element={<C18Baja />} />
       <Route render={() => <h1>Not found!</h1>} />
     </Routes>
   </BrowserRouter>

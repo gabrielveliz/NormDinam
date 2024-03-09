@@ -21,13 +21,19 @@ const CajD18 = () =>{
                     <span>Masividad Correos</span>
                 </div>
             </Link>
+            <Link to="/c18baja" style={{ textDecoration: 'none' }}>
+                <div className="options">
+                    <span>Baja Recuperos</span>
+                </div>
+            </Link>
             <br />
             <Link to="/home" style={{ textDecoration: 'none' }}>
                     <div className="options" >
                         <span>Regresar</span>
                     </div>
             </Link>
-            <Fot></Fot>
+            
+            <Fot/>
         </div>
         </>
     );
