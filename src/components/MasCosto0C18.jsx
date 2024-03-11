@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 
 
-const ExcelHandler = ({fecha}) => {
+const MasCosto0C18 = ({fecha}) => {
   const [excelData, setExcelData] = useState(null);
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
@@ -23,6 +23,7 @@ const ExcelHandler = ({fecha}) => {
     day: '2-digit'
   };
 
+
   const currentDate = new Date();
   const monthNames = ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO",
                       "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"];
@@ -34,8 +35,8 @@ const ExcelHandler = ({fecha}) => {
   const formattedDateTime = formatter.format(currentDateTime);
 
   const handleFileUpload = (e) => {
-    let contador = 0;
     const file = e.target.files[0];
+    let contador=0;
 
     if (file) {
       const reader = new FileReader();
@@ -66,7 +67,7 @@ const ExcelHandler = ({fecha}) => {
         const nonEmptyRows = jsonData.filter(row => row.some(cell => cell !== undefined && cell !== ""));
 
         const extractedData = nonEmptyRows.map((row, index) => {
-          contador = contador +1;
+            contador = contador +1;
           if (index === 0) {
             return row;
           }
@@ -96,7 +97,7 @@ const ExcelHandler = ({fecha}) => {
         if (negra !== '') {
             return null; // No agregar esta fila al archivo Excel
           }
-          if (camp !== 'Oferta PRC') {
+          if (oferta === '' || camp === 'Oferta PRC') {
             return null; // No agregar esta fila al archivo Excel
           }
       
@@ -106,7 +107,7 @@ const ExcelHandler = ({fecha}) => {
             const transformedRow = [
                 "CAJA 18",
                 "CAJA 18",
-                72840,
+                72841,
                 rut,
                 dv,
                 name,
@@ -114,12 +115,10 @@ const ExcelHandler = ({fecha}) => {
                 deuda,
                 oferta,
                 "",
-                email,
+                email, 
                 contador%2===1 ? "Miglen Tovar":"Karina Espina",
                 contador%2===1 ? "mtovar@estandar.phoenixserviceinfo.cl":"kespina@estandar.phoenixserviceinfo.cl",
                 contador%2===1 ? "mtovar@cob.phoenixservice.cl":"kespina@cob.phoenixservice.cl",
-                "Katherine Caneiro",
-                "kcaneiro@phoenixservice.cl",
                 month,
                 year,
                 fecha.substring(8,10),
@@ -127,7 +126,7 @@ const ExcelHandler = ({fecha}) => {
                 fecha.substring(0,4),
                 "",
                 "Ejecutiva de Normalización",
-                "PRC"
+                "COSTO 0"
               ];
     
     
@@ -157,13 +156,13 @@ const ExcelHandler = ({fecha}) => {
 
     // Crear una nueva hoja
     const newSheet = XLSX.utils.aoa_to_sheet([["INSTITUCIÓN", "SEGMENTOINSTITUCIÓN", "message_id","RUT","DV","RAZON_SOCIAL",
-    "OPERACION","DEUDA","OFERTA","TOTAL","dest_email","name_from","mail_from","CORREO","NOMBRE_SUPERVISOR","CORREO_SUPERVISOR",
+    "OPERACION","DEUDA","OFERTA","TOTAL","dest_email","name_from","mail_from","CORREO",
     "MES_CURSO","ANO_CURSO","DIA_OFERTA","MES_OFERTA","ANO_OFERTA","FONO EJECUTIVO","CARGO EJECUTIVO","FOCO"
 
 ], ...excelData.slice(1)]);
 
     // Agregar la hoja al nuevo libro
-    XLSX.utils.book_append_sheet(newWorkbook, newSheet, 'PRC');
+    XLSX.utils.book_append_sheet(newWorkbook, newSheet, 'COSTO 0');
 
     const excelBuffer = XLSX.write(newWorkbook, {
       bookType: 'xlsx',
@@ -172,7 +171,7 @@ const ExcelHandler = ({fecha}) => {
 
     const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
 
-    saveAs(blob, 'CAJA 18 ' + formattedDateTime + ' - PRC.xlsx');
+    saveAs(blob, 'CAJA 18 ' + formattedDateTime + ' - COSTO 0.xlsx');
   };
 
   return (
@@ -180,18 +179,18 @@ const ExcelHandler = ({fecha}) => {
       <div className="file-select" id="src-file1" >
 
         <Form.Group controlId="formFile" className="mb-3">
-        <Form.Label>MASIVIDAD Oferta PRC</Form.Label>
+        <Form.Label>MASIVIDAD COSTO 0</Form.Label>
         <Form.Control type="file" accept=".xlsx" onChange={handleFileUpload}/>
       </Form.Group>
       </div>
       {excelData && (
         <div>
-        <p>Nuevo Archivo: {'CAJA 18 ' + formattedDateTime + ' - PRC.xlsx'}</p>
-        <Button onClick={handleDownload}>Descargar masividad oferta PRC</Button>
+        <p>Nuevo Archivo: {'CAJA 18 ' + formattedDateTime + ' - COSTO 0.xlsx'}</p>
+        <Button onClick={handleDownload}>Descargar masividad COSTO 0</Button>
         </div>
       )}
     </div>
   );
 };
 
-export default ExcelHandler;
+export default MasCosto0C18;
