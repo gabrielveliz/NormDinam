@@ -35,7 +35,7 @@ const MasReproC18 = ({fecha}) => {
   const formattedDateTime = formatter.format(currentDateTime);
 
   const handleFileUpload = (e) => {
-    let contador = 0;
+
     const file = e.target.files[0];
 
     if (file) {
@@ -67,7 +67,7 @@ const MasReproC18 = ({fecha}) => {
         const nonEmptyRows = jsonData.filter(row => row.some(cell => cell !== undefined && cell !== ""));
 
         const extractedData = nonEmptyRows.map((row, index) => {
-            contador = contador + 1;
+
           if (index === 0) {
             return row;
           }
@@ -116,9 +116,9 @@ const MasReproC18 = ({fecha}) => {
                 "",
                 "",
                 email,
-                contador%2===1 ? "Miglen Tovar":"Karina Espina",
-                contador%2===1 ? "mtovar@estandar.phoenixserviceinfo.cl":"kespina@estandar.phoenixserviceinfo.cl",
-                contador%2===1 ? "mtovar@cob.phoenixservice.cl":"kespina@cob.phoenixservice.cl",
+                "Nicole Milla",
+                "nmilla@estandar.phoenixserviceinfo.cl",
+                "nmilla@cob.phoenixservice.cl",
                 month,
                 year,
                 fecha.substring(8,10),

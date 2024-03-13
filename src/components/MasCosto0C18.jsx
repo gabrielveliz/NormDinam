@@ -36,7 +36,7 @@ const MasCosto0C18 = ({fecha}) => {
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
-    let contador=0;
+
 
     if (file) {
       const reader = new FileReader();
@@ -67,7 +67,7 @@ const MasCosto0C18 = ({fecha}) => {
         const nonEmptyRows = jsonData.filter(row => row.some(cell => cell !== undefined && cell !== ""));
 
         const extractedData = nonEmptyRows.map((row, index) => {
-            contador = contador +1;
+
           if (index === 0) {
             return row;
           }
@@ -85,7 +85,6 @@ const MasCosto0C18 = ({fecha}) => {
         const name=nameIndex !== undefined ? formattedRow[nameIndex] : '';
         const deuda=nameIndex !== undefined ? formattedRow[deudaIndex] : '';
         const oferta=nameIndex !== undefined ? formattedRow[ofertaIndex] : '';
-
         const pago=nameIndex !== undefined ? formattedRow[pagoIndex] : '';
         const negra=nameIndex !== undefined ? formattedRow[negraIndex] : '';
         const camp=nameIndex !== undefined ? formattedRow[campIndex] : '';
@@ -116,9 +115,9 @@ const MasCosto0C18 = ({fecha}) => {
                 oferta,
                 "",
                 email, 
-                contador%2===1 ? "Miglen Tovar":"Karina Espina",
-                contador%2===1 ? "mtovar@estandar.phoenixserviceinfo.cl":"kespina@estandar.phoenixserviceinfo.cl",
-                contador%2===1 ? "mtovar@cob.phoenixservice.cl":"kespina@cob.phoenixservice.cl",
+                "Nicole Milla",
+                "nmilla@estandar.phoenixserviceinfo.cl",
+                "nmilla@cob.phoenixservice.cl",
                 month,
                 year,
                 fecha.substring(8,10),
