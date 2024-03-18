@@ -26,6 +26,11 @@ const CajD18 = () =>{
                     <span>Baja Recuperos</span>
                 </div>
             </Link>
+            <Link to="/C18comp" style={{ textDecoration: 'none' }}>
+                <div className="options">
+                    <span>Resultantes</span>
+                </div>
+            </Link>
             <br />
             <Link to="/home" style={{ textDecoration: 'none' }}>
                     <div className="options" >

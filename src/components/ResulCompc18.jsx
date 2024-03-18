@@ -50,6 +50,15 @@ function CSVProcessor() {
     return col1;
 
  }
+
+ function getCurrentDate() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}${month}${day}`;
+  }
+
   const processData = () => {
     if (!csvData) return;
 
@@ -70,9 +79,10 @@ function CSVProcessor() {
     // Crear un enlace para descargar el archivo
     const blob = new Blob([textContent], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
+    const currentDate = getCurrentDate();
     const a = document.createElement('a');
     a.href = url;
-    a.download = '600PHOEN_yyyyymmdd.txt';
+    a.download = `600PHOEN_${currentDate}.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
