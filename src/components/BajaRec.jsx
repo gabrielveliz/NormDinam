@@ -71,7 +71,7 @@ function BajaRec() {
       <Button className='bottondes' onClick={extractData}>Procesar</Button>
       {csvData.length > 0 && (
         <CSVLink data={csvData} filename={fileName}>
-          <Button className='bottondes'>Descargar CSV</Button>
+          <Button variant="success" className='bottondes'>Descargar CSV</Button>
         </CSVLink>
       )}
     </div>
