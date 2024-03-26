@@ -60,7 +60,7 @@ const MasReproC18 = ({fecha}) => {
         const emailIndex = columnIndexMap['MAIL'];
         const pagoIndex = columnIndexMap['TIPO DE PAGO'];
         const negraIndex = columnIndexMap['MOTIVO'];
-
+        const basereproindex = columnIndexMap['OFERTA BASE REPROGRAMACION'];
         
 
         
@@ -88,7 +88,7 @@ const MasReproC18 = ({fecha}) => {
 
         const pago=nameIndex !== undefined ? formattedRow[pagoIndex] : '';
         const negra=nameIndex !== undefined ? formattedRow[negraIndex] : '';
-
+        const baserepro=nameIndex !== undefined ? formattedRow[basereproindex] : '';
         
         
         if (pago !== '') {
@@ -97,7 +97,7 @@ const MasReproC18 = ({fecha}) => {
         if (negra !== '') {
             return null; // No agregar esta fila al archivo Excel
           }
-          if (oferta !== '') {
+          if (oferta !== '' || baserepro!=="NO ESTA EN BASE") {
             return null; // No agregar esta fila al archivo Excel
           }
       

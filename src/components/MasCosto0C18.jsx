@@ -56,11 +56,12 @@ const MasCosto0C18 = ({fecha}) => {
         const nameIndex=columnIndexMap['Nombre'];
         const ddasIdNumeroOperacIndex = columnIndexMap['Número Operación de crédito'];
         const deudaIndex = columnIndexMap['Deuda'];
-        const ofertaIndex = columnIndexMap['Monto Oferta'];
+
         const emailIndex = columnIndexMap['MAIL'];
         const pagoIndex = columnIndexMap['TIPO DE PAGO'];
         const negraIndex = columnIndexMap['MOTIVO'];
         const campIndex = columnIndexMap['Campaña'];
+        const basereproindex = columnIndexMap['OFERTA BASE REPROGRAMACION'];
         
 
         
@@ -84,10 +85,11 @@ const MasCosto0C18 = ({fecha}) => {
         const ddasIdNumeroOperac = ddasIdNumeroOperacIndex !== undefined ? formattedRow[ddasIdNumeroOperacIndex] : '';
         const name=nameIndex !== undefined ? formattedRow[nameIndex] : '';
         const deuda=nameIndex !== undefined ? formattedRow[deudaIndex] : '';
-        const oferta=nameIndex !== undefined ? formattedRow[ofertaIndex] : '';
         const pago=nameIndex !== undefined ? formattedRow[pagoIndex] : '';
         const negra=nameIndex !== undefined ? formattedRow[negraIndex] : '';
         const camp=nameIndex !== undefined ? formattedRow[campIndex] : '';
+        const baserepro=nameIndex !== undefined ? formattedRow[basereproindex] : '';
+        
         
         
         if (pago !== '') {
@@ -96,7 +98,7 @@ const MasCosto0C18 = ({fecha}) => {
         if (negra !== '') {
             return null; // No agregar esta fila al archivo Excel
           }
-          if (oferta === '' || camp === 'Oferta PRC') {
+          if (baserepro==="NO ESTA EN BASE" || camp === 'Oferta PRC' ) {
             return null; // No agregar esta fila al archivo Excel
           }
       
@@ -112,7 +114,7 @@ const MasCosto0C18 = ({fecha}) => {
                 name,
                 ddasIdNumeroOperac,
                 deuda,
-                oferta,
+                baserepro,
                 "",
                 email, 
                 "Atención Cliente Caja 18.",
