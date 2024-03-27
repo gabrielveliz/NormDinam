@@ -8,25 +8,28 @@ import C18Mas from "./views/C18Mas"
 import Cardif from "./views/Cardif"
 import ResultSC from "./views/ResultSC"
 import C18Resul from "./views/C18Resul"
-
+import CardifInforVent from "./views/CardifInforVent" 
+import CardifAsignacion from "./views/CardifAsignacion" 
 
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/SanCon" element={<SantCons />} />
-      <Route path="/cardif" element={<Cardif />} />
-      <Route path="/ResulanteSC" element={<ResultSC />} />
-      <Route path="/C18" element={<CajD18 />} />
-      <Route path="/C18asig" element={<C18Asig />} />
-      <Route path="/C18mas" element={<C18Mas />} />
-      <Route path="/C18Baja" element={<C18Baja />} />
-      <Route path="/C18comp" element={<C18Resul />} />
-      <Route render={() => <h1>Not found!</h1>} />
-    </Routes>
-  </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/SanCon" element={<SantCons />} />
+        <Route path="/cardif" element={<Cardif />} />
+        <Route path="/CardifInforVent" element={<CardifInforVent />} />
+        <Route path="/Cardifasign" element={<CardifAsignacion />} />
+        <Route path="/ResulanteSC" element={<ResultSC />} />
+        <Route path="/C18" element={<CajD18 />} />
+        <Route path="/C18asig" element={<C18Asig />} />
+        <Route path="/C18mas" element={<C18Mas />} />
+        <Route path="/C18Baja" element={<C18Baja />} />
+        <Route path="/C18comp" element={<C18Resul />} />
+        <Route render={() => <h1>Not found!</h1>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

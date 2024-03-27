@@ -108,7 +108,7 @@ const MasCosto0C18 = ({fecha}) => {
             const transformedRow = [
                 "CAJA 18",
                 "CAJA 18",
-                72841,
+                82275,
                 rut,
                 dv,
                 name,
@@ -125,7 +125,7 @@ const MasCosto0C18 = ({fecha}) => {
                 fecha.substring(8,10),
                 monthNames[parseInt(fecha.substring(6,8))-1],
                 fecha.substring(0,4),
-                "",
+                442358500,
                 "Ejecutiva de Normalización",
                 "COSTO 0"
               ];
@@ -158,7 +158,7 @@ const MasCosto0C18 = ({fecha}) => {
     // Crear una nueva hoja
     const newSheet = XLSX.utils.aoa_to_sheet([["INSTITUCIÓN", "SEGMENTOINSTITUCIÓN", "message_id","RUT","DV","RAZON_SOCIAL",
     "OPERACION","DEUDA","OFERTA","TOTAL","dest_email","name_from","mail_from","CORREO",
-    "MES_CURSO","ANO_CURSO","DIA_OFERTA","MES_OFERTA","ANO_OFERTA","FONO EJECUTIVO","CARGO EJECUTIVO","FOCO"
+    "MES_CURSO","ANO_CURSO","DIA_OFERTA","MES_OFERTA","ANO_OFERTA","FONO_INB","CARGO EJECUTIVO","FOCO"
 
 ], ...excelData.slice(1)]);
 
