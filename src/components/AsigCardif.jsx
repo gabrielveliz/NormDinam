@@ -125,7 +125,11 @@ function AsigCardif() {
     }
 
     function card(tar){
-      let tarjeta = tar.toString()
+
+      if(tar){
+        let tarjeta = tar.toString()
+      }
+      
 
       if(tarjeta.length===4)
       {
