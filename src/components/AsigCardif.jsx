@@ -70,7 +70,7 @@ function AsigCardif() {
 
     const columnIndexV = headers.indexOf('Email');
 
-    const columnIndexW = headers.indexOf('Cta Cte');
+    const columnIndexW = headers.indexOf('CTA CTE');
 
     const columnIndexX = headers.indexOf('FonoMovil');
 
@@ -125,11 +125,11 @@ function AsigCardif() {
     }
 
     function card(tar){
+      let tarjeta = "";
 
-
-        let tarjeta = tar.toString()
-
-      
+      if(typeof tar !== 'undefined')
+      {
+        tarjeta = tar.toString()
 
       if(tarjeta.length===4)
       {
@@ -152,6 +152,11 @@ function AsigCardif() {
       {
         tarjeta ="";
       }
+      }
+      else{
+        tarjeta = "";
+        
+    }
       return tarjeta;
     }
     
@@ -193,9 +198,9 @@ function AsigCardif() {
         FECHA_APERT_CTACTE: row[headers[columnIndexR]] ?  formattdate(row[headers[columnIndexR]]) : ''  ,
         FEC_APER_TAR: row[headers[columnIndexS]] ?  formattdate(row[headers[columnIndexS]]) : ''  ,
         XX2: "",
-        NROTC: row[headers[columnIndexC1]] ? row[headers[columnIndexU]]:"",
+        NROTC: row[headers[columnIndexC1]] || row[headers[columnIndexU]] ? card(row[headers[columnIndexU]]):"",
         CORREO: row[headers[columnIndexV]],
-        CtaCte: row[headers[columnIndexC1]] ? row[headers[columnIndexW]]:"",
+        CtaCte: row[headers[columnIndexC1]] || row[headers[columnIndexU]] ? card(row[headers[columnIndexW]]):"",
         FONOMOVIL: row[headers[columnIndexX]] ? formateatelefono(row[headers[columnIndexX]]):"",
         FonoPartCompleto: row[headers[columnIndexC1]] ? joinphone(row[headers[columnIndexY1]],row[headers[columnIndexY2]]) :"",
         FonoLabCompleto: row[headers[columnIndexC1]] ? joinphone(row[headers[columnIndexZ1]],row[headers[columnIndexZ2]]):"",
