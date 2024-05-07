@@ -126,9 +126,9 @@ function AsigCardif() {
 
     function card(tar){
 
-      if(tar){
+
         let tarjeta = tar.toString()
-      }
+
       
 
       if(tarjeta.length===4)
